@@ -22,16 +22,16 @@ export class FetchApiDataService {
   }
 
   // User registration
-  public userRegistration(userDetails: any): Observable<any> {
+  public userRegistration(userData: any): Observable<any> {
     return this.http
-      .post(apiUrl + 'users', userDetails)
+      .post(apiUrl + 'users', userData)
       .pipe(catchError(this.handleError));
   }
 
   // User login
-  public userLogin(credentials: any): Observable<any> {
+  public userLogin(userData: any): Observable<any> {
     return this.http
-      .post(apiUrl + 'login', credentials)
+      .post(apiUrl + 'login', userData)
       .pipe(catchError(this.handleError));
   }
 
