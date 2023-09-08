@@ -1,8 +1,44 @@
 <!DOCTYPE html>
 <!-- src/app/movie-card/movie-card.component.html -->
-<mat-card *ngFor="let movie of movies; let i = index">
-  <mat-dialog-content>
-    <mat-card-title>{{ movie.title }}</mat-card-title>
-    <mat-card-subtitle><img src="{{ movie.imagePath }}" /></mat-card-subtitle>
-  </mat-dialog-content>
-</mat-card>
+<div #movieContainer style="display: flex; overflow: auto">
+  <mat-card *ngFor="let movie of movies" style="flex: 1 1 auto">
+    <mat-card-header>
+      <mat-card-title>{{ movie.title }}</mat-card-title>
+      <mat-card-subtitle
+        >Directed by: {{ movie.director.name }}</mat-card-subtitle
+      >
+    </mat-card-header>
+    <img [src]="sanitizeImageUrl(movie.imagePath)" alt="{{ movie.title }}" />
+    <mat-card-actions>
+      <!-- Genre Menu -->
+      <button mat-button color="primary" [matMenuTriggerFor]="genremenu">
+        Genre
+      </button>
+      <mat-menu #genremenu="matMenu">
+        <button mat-menu-item disabled>{{ movie.genre.name }}</button>
+        <button mat-menu-item disabled>{{ movie.genre.description }}</button>
+      </mat-menu>
+
+      <!-- Director Menu -->
+      <button mat-button color="primary" [matMenuTriggerFor]="directormenu">
+        Director
+      </button>
+      <mat-menu #directormenu="matMenu">
+        <button mat-menu-item disabled>{{ movie.director.name }}</button>
+        <button mat-menu-item disabled>{{ movie.director.bio }}</button>
+      </mat-menu>
+
+      <!-- Synopsis Menu -->
+      <button mat-button color="primary" [matMenuTriggerFor]="synopsismenu">
+        Synopsis
+      </button>
+      <mat-menu #synopsismenu="matMenu">
+        <button mat-menu-item disabled>{{ movie.title }}</button>
+        <button mat-menu-item disabled>{{ movie.description }}</button>
+      </mat-menu>
+
+      <!-- Favorite icon -->
+      <mat-icon>favorite_border</mat-icon>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -8,16 +8,33 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { MovieDialogComponent } from './movie-dialog/movie-dialog.component';
 
+const appRoutes: Routes = [
+  { path: 'movies', component: MovieCardComponent },
+  { path: 'welcome', component: WelcomePageComponent },
+  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
+];
 @NgModule({
-  declarations: [AppComponent, UserRegistrationFormComponent, UserLoginFormComponent, MovieCardComponent],
+  declarations: [
+    AppComponent,
+    UserRegistrationFormComponent,
+    UserLoginFormComponent,
+    MovieCardComponent,
+    WelcomePageComponent,
+    MovieDialogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,6 +47,9 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
     MatFormFieldModule,
     MatSnackBarModule,
     FormsModule,
+    MatIconModule,
+    RouterModule.forRoot(appRoutes),
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
