@@ -21,6 +21,11 @@ export class FetchApiDataService {
     return new HttpHeaders({ Authorization: 'Bearer ' + token });
   }
 
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
+  }
+
   // User registration
   public userRegistration(userData: any): Observable<any> {
     return this.http
@@ -33,6 +38,15 @@ export class FetchApiDataService {
     return this.http
       .post(apiUrl + 'login', userData)
       .pipe(catchError(this.handleError));
+  }
+
+  // Get logged-in user
+  public getLoggedInUser(): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (user && user.username) {
+      return this.getUser(user.username);
+    }
+    return throwError('User not found');
   }
 
   // Get all movies
@@ -70,7 +84,7 @@ export class FetchApiDataService {
       .pipe(catchError(this.handleError));
   }
 
-  // Get favourite movies for a user
+  // Get favorite movies for a user
   public getFavorites(username: string): Observable<any> {
     return this.http
       .get(apiUrl + 'users/' + username + '/favorites', {
@@ -79,15 +93,58 @@ export class FetchApiDataService {
       .pipe(catchError(this.handleError));
   }
 
-  // Add a movie to favorite Movies
-  public addFavorite(username: string, movieId: string): Observable<any> {
+  // Add or Remove a movie from user's favorites
+  addToFavorites(username: string, movieId: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
     return this.http
       .post(
-        apiUrl + 'users/' + username + '/favorites/' + movieId,
+        `https://dark-blue-lizard-kilt.cyclic.app/users/${username}/movies/${movieId}`,
         {},
-        { headers: this.createAuthHeader() }
+        { headers }
       )
-      .pipe(catchError(this.handleError));
+      .pipe(map(this.extractResponseData), catchError(this.handleError))
+      .pipe(
+        map((response: any) => {
+          // Update the local user object to match the backend state
+          const user = JSON.parse(localStorage.getItem('user') || '{}');
+          user.favorites.push(movieId); // Change this line
+          localStorage.setItem('user', JSON.stringify(user));
+          return response;
+        })
+      );
+  }
+
+  removeFromFavorites(username: string, movieId: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http
+      .delete(
+        `https://dark-blue-lizard-kilt.cyclic.app/users/${username}/movies/${movieId}`,
+        { headers }
+      )
+      .pipe(map(this.extractResponseData), catchError(this.handleError))
+      .pipe(
+        map((response: any) => {
+          // Update the local user object to match the backend state
+          const user = JSON.parse(localStorage.getItem('user') || '{}');
+          const index = user.favorites.indexOf(movieId); // Change this line
+          if (index >= 0) {
+            user.favorites.splice(index, 1); // And this line
+          }
+          localStorage.setItem('user', JSON.stringify(user));
+          return response;
+        })
+      );
+  }
+
+  isFavoriteMovie(movieId: string): boolean {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return user.favorites.indexOf(movieId) >= 0;
   }
 
   // Edit user
@@ -103,15 +160,6 @@ export class FetchApiDataService {
   public deleteUser(username: string): Observable<any> {
     return this.http
       .delete(apiUrl + 'users/' + username, {
-        headers: this.createAuthHeader(),
-      })
-      .pipe(catchError(this.handleError));
-  }
-
-  // Delete a movie from the favorite movies
-  public deleteFavorite(username: string, movieId: string): Observable<any> {
-    return this.http
-      .delete(apiUrl + 'users/' + username + '/favorites/' + movieId, {
         headers: this.createAuthHeader(),
       })
       .pipe(catchError(this.handleError));

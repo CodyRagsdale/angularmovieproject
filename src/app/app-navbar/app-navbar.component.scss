@@ -1,0 +1,41 @@
+// app-navbar.component.scss
+
+mat-toolbar {
+  background-color: #2c3e50; // Deep blue color for the background
+  color: #ecf0f1; // Light gray color for the text
+  font-family: "Verdana", sans-serif; // Using Verdana font for a modern look
+  padding: 0 20px; // Horizontal padding to give some breathing space
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2); // Subtle shadow below the toolbar
+
+  // Styling the buttons
+  button {
+    font-size: 18px; // Making text larger
+    font-weight: bold; // Making text bold
+    margin-right: 20px; // Adding some margin to the right of each button
+    font-family: "Arial", sans-serif; // Using Verdana for a more modern look
+
+    // Adding a hover effect
+    &:hover {
+      background-color: #34495e; // Darker blue color for hover
+      color: #ffffff; // White color for text on hover
+    }
+  }
+
+  .title {
+    flex: 1;
+    font-size: 2em;
+    font-weight: bold;
+  }
+}
+
+// Mobile responsiveness: Adjusting layout for smaller screens
+@media (max-width: 600px) {
+  mat-toolbar {
+    padding: 0 10px; // Reducing padding for smaller screens
+
+    button {
+      font-size: 16px; // Making text a bit smaller for mobile
+      margin-right: 15px; // Reducing margin for mobile
+    }
+  }
+}

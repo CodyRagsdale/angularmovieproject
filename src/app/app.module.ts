@@ -14,16 +14,22 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { MovieDialogComponent } from './movie-dialog/movie-dialog.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AppNavbarComponent } from './app-navbar/app-navbar.component';
+import { MovieWelcomeDialogComponent } from './movie-welcome-dialog/movie-welcome-dialog.component';
 
 const appRoutes: Routes = [
   { path: 'movies', component: MovieCardComponent },
   { path: 'welcome', component: WelcomePageComponent },
+  { path: 'profile', component: UserProfileComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 @NgModule({
@@ -34,6 +40,9 @@ const appRoutes: Routes = [
     MovieCardComponent,
     WelcomePageComponent,
     MovieDialogComponent,
+    UserProfileComponent,
+    AppNavbarComponent,
+    MovieWelcomeDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +59,8 @@ const appRoutes: Routes = [
     MatIconModule,
     RouterModule.forRoot(appRoutes),
     MatMenuModule,
+    MatToolbarModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

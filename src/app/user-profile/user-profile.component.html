@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<div class="profile-container">
+  <div class="user-details">
+    <h1>{{ getProfileTitle() }}</h1>
+    <form (ngSubmit)="handleUpdate()">
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="username"
+          name="username"
+          required
+          placeholder="{(username)}"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Birthdate</mat-label>
+        <input
+          matInput
+          type="date"
+          [(ngModel)]="birthdate"
+          name="birthdate"
+          required
+        />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Update</button>
+    </form>
+
+    <button mat-raised-button color="warn" (click)="handleDelete()">
+      Delete Account
+    </button>
+  </div>
+  <div class="favorites-section">
+    <h2>Your Favorite Movies</h2>
+    <div class="favorites-container" #favoritesContainer>
+      <mat-card *ngFor="let movie of favoriteMovies">
+        <mat-card-header>
+          <mat-card-title>{{ movie.title }}</mat-card-title>
+          <mat-card-subtitle
+            >Directed by: {{ movie.director.name }}</mat-card-subtitle
+          >
+        </mat-card-header>
+        <div class="image-container">
+          <img
+            [src]="sanitizeImageUrl(movie.imagePath)"
+            alt="{{ movie.title }}"
+          />
+        </div>
+        <mat-card-actions> </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

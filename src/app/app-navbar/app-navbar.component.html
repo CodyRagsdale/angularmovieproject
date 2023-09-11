@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<mat-toolbar *ngIf="getCurrentUrl() !== '/welcome'">
+  <span class="title">myFlix</span>
+  <!-- For Movies Screen -->
+  <button
+    *ngIf="getCurrentUrl() === '/movies'"
+    mat-button
+    (click)="navigateToProfile()"
+  >
+    Profile
+  </button>
+
+  <!-- For Profile Screen -->
+  <button
+    *ngIf="getCurrentUrl() === '/profile'"
+    mat-button
+    (click)="navigateToMovies()"
+  >
+    Home
+  </button>
+
+  <!-- Logout button -->
+  <button *ngIf="getCurrentUrl() !== '/welcome'" mat-button (click)="logout()">
+    Logout
+  </button>
+</mat-toolbar>

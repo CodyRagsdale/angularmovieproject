@@ -7,6 +7,7 @@
       <mat-card-subtitle
         >Directed by: {{ movie.director.name }}</mat-card-subtitle
       >
+      <mat-card-subtitle>{{ movie.releaseYear }}</mat-card-subtitle>
     </mat-card-header>
     <img [src]="sanitizeImageUrl(movie.imagePath)" alt="{{ movie.title }}" />
     <mat-card-actions>
@@ -38,7 +39,11 @@
       </mat-menu>
 
       <!-- Favorite icon -->
-      <mat-icon>favorite_border</mat-icon>
+      <mat-icon
+        (click)="toggleFavorite(movie._id)"
+        [ngClass]="{ favorite: isFavorite(movie._id) }"
+        >favorite_border</mat-icon
+      >
     </mat-card-actions>
   </mat-card>
 </div>
