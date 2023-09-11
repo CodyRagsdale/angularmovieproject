@@ -65,7 +65,7 @@ mat-card {
 @media (max-width: 992px) {
   mat-card {
     flex: 0 0 calc(50% - 16px); // 2 cards in a row for small to medium screens
-    min-width: 300px;
+    min-width: 500px;
   }
 }
 

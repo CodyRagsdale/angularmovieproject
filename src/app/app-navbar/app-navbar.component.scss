@@ -1,7 +1,7 @@
 // app-navbar.component.scss
 
 mat-toolbar {
-  background-color: #2c3e50; // Deep blue color for the background
+  background-color: #101357; // Deep blue color for the background
   color: #ecf0f1; // Light gray color for the text
   font-family: "Verdana", sans-serif; // Using Verdana font for a modern look
   padding: 0 20px; // Horizontal padding to give some breathing space
@@ -16,8 +16,9 @@ mat-toolbar {
 
     // Adding a hover effect
     &:hover {
-      background-color: #34495e; // Darker blue color for hover
+      background-color: #161c7c; // Darker blue color for hover
       color: #ffffff; // White color for text on hover
+      transition: 0.6s;
     }
   }
 
