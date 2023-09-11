@@ -17,7 +17,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref": "/angularmovieproject/",
             "outputPath": "dist/my-flix-angular-client",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -51,6 +50,10 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "github-pages": {
+              "baseHref": "/myFlix-Angular-client/",
+              "outputPath": "dist/myFlix-Angular-client"
             }
           },
           "defaultConfiguration": "production"
