@@ -52,7 +52,7 @@
               "namedChunks": true
             },
             "github-pages": {
-              "baseHref": "/myFlix-Angular-client/",
+              "baseHref": "/angularmovieproject/",
               "outputPath": "dist/myFlix-Angular-client"
             }
           },
