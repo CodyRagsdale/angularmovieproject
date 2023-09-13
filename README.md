@@ -21,6 +21,10 @@
 
 ---
 
+## Live Demo
+
+[![Live Demo](https://img.shields.io/badge/demo-live-green.svg)](https://codyragsdale.github.io/angularmovieproject/)
+
 ## Project Description
 
 The MyFlix Angular Client is a single-page, responsive movie app built using Angular. The project is designed to demonstrate skills in building modern web applications using Angular and to provide movie enthusiasts with a platform to interact with some of their (or in this case, MY) favorite movies. This client-side application interfaces with the existing [MyFlix API](https://github.com/CodyRagsdale/movie-api) to handle data through REST API endpoints.
