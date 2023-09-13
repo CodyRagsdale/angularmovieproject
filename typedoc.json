@@ -1,0 +1,9 @@
+{
+  "tsconfig": "tsconfig.json",
+  "out": "./docs",
+  "entryPoints": ["./src/app"],
+  "entryPointStrategy": "expand",
+  "exclude": ["node_modules", "**/*.spec.ts"],
+  "theme": "default",
+  "name": "myFlix Angular Project"
+}

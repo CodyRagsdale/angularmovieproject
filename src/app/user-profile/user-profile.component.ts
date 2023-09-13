@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
+/**
+ * UserProfileComponent - A component to display the user's profile.
+ */
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -24,11 +27,18 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   movies!: any[];
   favoriteMovies: any[] = [];
 
+  /** Reference to the container that will display the favorite movies. */
   @ViewChild('favoritesContainer') favoritesContainer!: ElementRef;
   isDown = false;
   startX = 0;
   scrollLeft = 0;
 
+  /**
+   * @param http - HttpClient for making HTTP requests.
+   * @param router - Angular Router for navigation.
+   * @param fetchApiData - Custom service for fetching API data.
+   * @param sanitizer - Angular service for sanitizing values.
+   */
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -36,10 +46,16 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     private sanitizer: DomSanitizer
   ) {}
 
+  /**
+   * Angular OnInit lifecycle hook.
+   */
   ngOnInit(): void {
     this.getUser();
   }
 
+  /**
+   * Fetches the logged-in user's profile information.
+   */
   getUser(): void {
     this.fetchApiData.getLoggedInUser().subscribe((response: any) => {
       this.user = response;
@@ -55,10 +71,17 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Gets the title for the profile based on the username.
+   * @returns - String, the title of the profile.
+   */
   getProfileTitle(): string {
     return this.user?.username ? `${this.user.username}'s Profile` : '';
   }
 
+  /**
+   * Handles updating the user profile.
+   */
   handleUpdate(): void {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
@@ -89,6 +112,9 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
       });
   }
 
+  /**
+   * Handles deleting the user account.
+   */
   handleDelete(): void {
     const confirmDeletion = window.confirm(
       'Are you sure you want to delete your account?'
@@ -118,10 +144,19 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
       });
   }
 
+  /**
+   * Sanitizes and returns a safe URL. Was necessary for where my images were hosted.
+   * @param imageUrl - The raw URL to be sanitized.
+   * @returns - A sanitized and safe URL.
+   */
   sanitizeImageUrl(imageUrl: string): SafeUrl {
     return this.sanitizer.bypassSecurityTrustUrl(imageUrl);
   }
 
+  /**
+   * Angular AfterViewInit lifecycle hook.
+   * Enables custom drag-scrolling for the favorites container, and use of the mouse scroll wheel to scroll left/right.
+   */
   ngAfterViewInit(): void {
     const element = this.favoritesContainer.nativeElement;
 

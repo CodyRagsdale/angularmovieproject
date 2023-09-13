@@ -17,6 +17,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
+// Components
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
@@ -26,12 +27,21 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { MovieWelcomeDialogComponent } from './movie-welcome-dialog/movie-welcome-dialog.component';
 
+/**
+ * Application routes for navigation.
+ * @type {Routes}
+ */
 const appRoutes: Routes = [
   { path: 'movies', component: MovieCardComponent },
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
+
+/**
+ * @module AppModule
+ * The main application module.
+ */
 @NgModule({
   declarations: [
     AppComponent,
